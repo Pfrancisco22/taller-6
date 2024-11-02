@@ -1,0 +1,117 @@
+Definir usuarios como diccionario con datos de ejemplo (admin y vendedor)
+Definir productos como diccionario con algunos productos de ejemplo
+Definir ventas como lista vacía
+Definir usuario_actual como None
+
+Función login():
+    Pedir al usuario ingresar su nombre de usuario y contraseña
+    Para cada usuario en usuarios:
+        Si el nombre de usuario y la contraseña coinciden con los datos almacenados:
+            Asignar usuario_actual a este usuario
+            Retornar Verdadero
+    Mostrar mensaje de credenciales incorrectas
+    Retornar Falso
+
+Función logout():
+    Asignar None a usuario_actual
+    Mostrar mensaje de sesión cerrada
+
+Función create_user():
+    Pedir al usuario el nombre de usuario, contraseña y rol del nuevo usuario
+    Agregar el nuevo usuario a usuarios
+    Mostrar mensaje confirmando creación del usuario
+
+Función add_update_product():
+    Pedir al usuario el código, nombre, precio de compra, precio de venta, stock y unidad del producto
+    Agregar o actualizar el producto en el diccionario de productos con la información ingresada
+    Mostrar mensaje confirmando que el producto fue añadido o actualizado
+
+Función list_products():
+    Para cada producto en productos:
+        Mostrar el código, nombre, precio de venta y stock del producto
+
+Función search_product():
+    Pedir al usuario ingresar el código del producto
+    Si el producto existe en productos:
+        Mostrar nombre, precio de venta y stock del producto
+    Si no:
+        Mostrar mensaje de producto no encontrado
+
+Función buy_product():
+    Pedir al usuario ingresar el código del producto y la cantidad a comprar
+    Si el producto existe en productos:
+        Aumentar el stock del producto en la cantidad especificada
+        Mostrar mensaje confirmando que se añadió al inventario
+    Si no:
+        Mostrar mensaje de producto no encontrado
+
+Función list_sales():
+    Para cada venta en ventas:
+        Mostrar el nombre del producto, cantidad vendida y subtotal de la venta
+
+Función manage_admin():
+    Mientras usuario_actual esté definido:
+        Mostrar opciones de administrador:
+            1. Registrar usuario
+            2. Agregar/Actualizar producto
+            3. Consultar inventario
+            4. Buscar producto
+            5. Comprar producto
+            6. Resumir ventas
+            7. Cerrar sesión
+        Leer opción seleccionada
+        Según la opción:
+            1: Ejecutar create_user()
+            2: Ejecutar add_update_product()
+            3: Ejecutar list_products()
+            4: Ejecutar search_product()
+            5: Ejecutar buy_product()
+            6: Ejecutar list_sales()
+            7: Ejecutar logout() y salir del bucle
+            Si ninguna opción coincide:
+                Mostrar mensaje de opción no válida
+
+Función sell_product():
+    Pedir al usuario ingresar el código del producto y la cantidad a vender
+    Si el producto existe en productos y la cantidad en stock es suficiente:
+        Calcular subtotal de la venta
+        Disminuir stock del producto en la cantidad vendida
+        Agregar la venta a la lista de ventas
+        Mostrar mensaje confirmando la venta y el subtotal
+    Si no:
+        Mostrar mensaje de stock insuficiente o producto no encontrado
+
+Función manage_seller():
+    Mientras usuario_actual esté definido:
+        Mostrar opciones de vendedor:
+            1. Consultar inventario
+            2. Buscar producto
+            3. Vender producto
+            4. Cerrar sesión
+        Leer opción seleccionada
+        Según la opción:
+            1: Ejecutar list_products()
+            2: Ejecutar search_product()
+            3: Ejecutar sell_product()
+            4: Ejecutar logout() y salir del bucle
+            Si ninguna opción coincide:
+                Mostrar mensaje de opción no válida
+
+Función main():
+    Mostrar mensaje de bienvenida
+    Mientras Verdadero:
+        Mostrar opciones principales:
+            1. Login
+            2. Salir
+        Leer opción seleccionada
+        Según la opción:
+            1: Si login() es exitoso:
+                    Si el rol de usuario_actual es "admin":
+                        Ejecutar manage_admin()
+                    Si el rol de usuario_actual es "vendedor":
+                        Ejecutar manage_seller()
+                Si no:
+                    Mostrar mensaje de error de autenticación
+            2: Mostrar mensaje de salida y terminar el programa
+            Si ninguna opción coincide:
+                Mostrar mensaje de opción no válida
